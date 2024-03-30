@@ -11,6 +11,7 @@
   age.secrets = {
     vaultwarden.file = ../secrets/vaultwarden.age;
     gts.file = ../secrets/gts.age;
+    nextcloud.file = ../secrets/nextcloud.age;
   };
 
   networking.hostName = "kcloud-nix";
