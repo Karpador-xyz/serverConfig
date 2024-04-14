@@ -16,4 +16,6 @@ in {
   "godfish.age".publicKeys = zbox-keys;
   "uwu.age".publicKeys = zbox-keys;
   "ytdl.age".publicKeys = zbox-keys;
+  # wifi networks the zbox connects to
+  "wifi.age".publicKeys = zbox-keys;
 }
