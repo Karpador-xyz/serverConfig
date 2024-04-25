@@ -26,6 +26,7 @@
       media-remote-cache-days = 7;
       media-emoji-local-max-size = 102400;
       media-emoji-remote-max-size = 409600;
+      media-description-min-chars = 64;
     };
     environmentFile = config.age.secrets.gts.path;
     setupPostgresqlDB = true;
