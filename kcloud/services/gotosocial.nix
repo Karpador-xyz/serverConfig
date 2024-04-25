@@ -12,6 +12,7 @@
       trusted-proxies = "127.0.0.1";
       letsencrypt-enabled = false;
       accounts-registration-open = false;
+      log-level = "warn";
       # storage
       storage-backend = "s3";
       storage-s3-endpoint = "s3.eu-central-003.backblazeb2.com";
