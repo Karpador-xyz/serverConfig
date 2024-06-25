@@ -4,6 +4,7 @@
     ./hardware.nix
     ../common.nix
     ./containers.nix
+    ./jmusicbot.nix
   ];
 
   age.secrets = {

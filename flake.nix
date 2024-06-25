@@ -32,12 +32,15 @@
           unstable = unstable.legacyPackages."${system}";
         };
       };
-      karp-zbox = nixpkgs.lib.nixosSystem {
+      karp-zbox = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         modules = [
           ./karp-zbox/configuration.nix
           agenix.nixosModules.default
         ];
+        specialArgs = {
+          unstable = unstable.legacyPackages."${system}";
+        };
       };
     };
 

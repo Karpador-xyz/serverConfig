@@ -4,7 +4,6 @@
     ./hardware.nix
     ../common.nix
     ./services
-    ./bots
     ./system
   ];
 
