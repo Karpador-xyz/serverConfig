@@ -13,14 +13,6 @@
     recommendedGzipSettings = true;
 
     # NOTE: we'll usually want forceSSL, these are exceptions to that rule.
-    virtualHosts."wolfsblume.party" = {
-      addSSL = true;
-      enableACME = true;
-      locations."/" = {
-        return = "200 '&#128151;'";
-        extraConfig = "default_type text/html;";
-      };
-    };
     virtualHosts."dragontale.de" = {
       addSSL = true;
       enableACME = true;
