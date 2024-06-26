@@ -12,10 +12,10 @@
     config = {
       dbtype = "pgsql";
       dbtableprefix = "oc_";
-      defaultPhoneRegion = "AT";
-      overwriteProtocol = "https";
     };
-    extraOptions = {
+    settings = {
+      overwriteprotocol = "https";
+      default_phone_region = "AT";
       "mail_smtpmode" = "smtp";
       "mail_from_address" = "wolke";
       "mail_domain" = "karpador.xyz";

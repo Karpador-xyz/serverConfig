@@ -2,7 +2,7 @@
   description = "kcloud server config";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-23.11-small";
+    nixpkgs.url = "nixpkgs/nixos-24.05-small";
     unstable.url = "nixpkgs/nixos-unstable-small";
     deploy-rs = {
       url = "github:serokell/deploy-rs";

@@ -24,7 +24,10 @@
 
   # and tailscale
   services.tailscale.enable = true;
-  systemd.services.tailscaled.after = [ "network-online.target" ];
+  systemd.services.tailscaled = {
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+  };
 
   # reasonable log config
   services.journald.extraConfig = ''
