@@ -27,6 +27,7 @@
       media-emoji-local-max-size = 102400;
       media-emoji-remote-max-size = 409600;
       media-description-min-chars = 64;
+      http-client.timeout = "30s";
     };
     environmentFile = config.age.secrets.gts.path;
     setupPostgresqlDB = true;
