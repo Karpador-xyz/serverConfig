@@ -1,7 +1,7 @@
 { config, lib, ... }:
 {
   services.matrix-conduit = {
-    enable = false;
+    enable = true;
     settings.global = {
       server_name = "karp.lol";
       database_backend = "rocksdb";
