@@ -10,7 +10,12 @@
   age.secrets = {
     vaultwarden.file = ../secrets/vaultwarden.age;
     gts.file = ../secrets/gts.age;
-    nextcloud.file = ../secrets/nextcloud.age;
+    nextcloud = {
+      file = ../secrets/nextcloud.age;
+      owner = "nextcloud";
+      group = "nextcloud";
+      mode = "770";
+    };
   };
 
   networking.hostName = "kcloud-nix";

@@ -9,10 +9,14 @@
       wal_init_zero = "off";
       wal_recycle = "off";
     };
-    ensureDatabases = [ "gotosocial" ];
+    ensureDatabases = [ "gotosocial" "nextcloud" ];
     ensureUsers = [
       {
         name = "gotosocial";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "nextcloud";
         ensureDBOwnership = true;
       }
     ];
