@@ -24,9 +24,10 @@
       processChildrenOnly = true;
 
       # snapshots to keep
-      hourly = 24;
-      daily = 14;
-      monthly = 3;
+      hourly = 23;
+      daily = 7;
+      weekly = 2;
+      monthly = 1;
     };
     # we'll transfer stuff like pg dumps here
     # TODO: remove after migration is done
