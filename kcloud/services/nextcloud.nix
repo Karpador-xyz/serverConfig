@@ -1,6 +1,5 @@
 { pkgs, config, ... }:
 {
-  # TODO long way until this one's complete
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud29;
@@ -20,6 +19,8 @@
       overwriteprotocol = "https";
       default_phone_region = "AT";
       maintenance_window_start = 1;
+      "upgrade.disable-web" = true;
+      updatechecker = false;
       "mail_smtpmode" = "smtp";
       "mail_from_address" = "wolke";
       "mail_domain" = "karpador.xyz";
@@ -31,7 +32,6 @@
       "mail_smtpsecure" = "tls";
     };
     secretFile = config.age.secrets.nextcloud.path;
-    # stfu and cry about it, nextcloud
     phpOptions."opcache.interned_strings_buffer" = "9";
   };
   services.nginx.virtualHosts."${config.services.nextcloud.hostName}" = {
