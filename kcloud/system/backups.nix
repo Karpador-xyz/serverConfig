@@ -26,11 +26,16 @@
       # snapshots to keep
       hourly = 23;
       daily = 7;
-      weekly = 2;
-      monthly = 1;
+      weekly = 0;
+      monthly = 0;
     };
-    # we'll transfer stuff like pg dumps here
-    # TODO: remove after migration is done
-    datasets."zroot/DATA/old".autosnap = false;
+    datasets."zroot/DATA/postgres" = {
+      hourly = 23;
+      daily = 2;
+    };
+    datasets."zroot/DATA/pgbackup" = {
+      hourly = 1;
+      daily = 0;
+    };
   };
 }
