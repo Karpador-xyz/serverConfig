@@ -13,7 +13,7 @@
         size = "1G";
         content = {
           type = "filesystem";
-          format = "vfat";
+          format = "ext4";
           mountpoint = "/boot";
         };
         priority = 2;
@@ -25,6 +25,7 @@
           type = "zfs";
           pool = "zroot";
         };
+        priority = 4;
       };
     };
   };
