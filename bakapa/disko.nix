@@ -24,9 +24,10 @@
       canmount = "off";
       compression = "on";
       relatime = "on";
+      # https://openzfs.github.io/openzfs-docs/man/master/7/zfsprops.7.html#xattr
       xattr = "sa";
     };
-    options.ashift = 12;
+    options.ashift = "12";
 
     datasets = {
       # root fs - no impermanence for now
