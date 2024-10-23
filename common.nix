@@ -24,6 +24,7 @@
   services.openssh.settings = {
     PermitRootLogin = "without-password";
     PasswordAuthentication = false;
+    KbdInteractiveAuthentication = false;
   };
 
   # and tailscale
