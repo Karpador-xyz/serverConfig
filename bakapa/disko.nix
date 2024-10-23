@@ -9,6 +9,16 @@
         size = "1M";
         priority = 1; # Needs to be first partition
       };
+      partitions.boot = {
+        size = "1G";
+        content = {
+          type = "filesystem";
+          format = "vfat";
+          mountpoint = "/boot";
+        };
+        priority = 2;
+        hybrid.mbrBootableFlag = true;
+      };
       partitions.zroot = {
         size = "100%";
         content = {
@@ -30,25 +40,17 @@
     };
     options.ashift = "12";
 
-    datasets = {
+    datasets = let fs = mountpoint: {
+      type = "zfs_fs";
+      options.mountpoint = "legacy";
+      inherit mountpoint;
+    }; in {
       # root fs - no impermanence for now
-      "nixos" = {
-        type = "zfs_fs";
-        mountpoint = "/";
-        options.mountpoint = "legacy";
-      };
+      "nixos" = fs "/";
       # nix store
-      "nix" = {
-        type = "zfs_fs";
-        mountpoint = "/nix";
-        options.mountpoint = "legacy";
-      };
+      "nix" = fs "/nix";
       # for home folder
-      "home" = {
-        type = "zfs_fs";
-        mountpoint = "/home";
-        options.mountpoint = "legacy";
-      };
+      "home" = fs "/home";
     };
   };
 }
