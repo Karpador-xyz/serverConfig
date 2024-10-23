@@ -9,9 +9,6 @@
     initrd.availableKernelModules = [
       "xhci_pci" "virtio_pci" "virtio_scsi" "ahci" "usbhid" "sr_mod"
     ];
-    initrd.kernelModules = [ ];
-    kernelModules = [ ];
-    extraModulePackages = [ ];
 
     # allow zfs to find vda2
     zfs.devNodes = "/dev";

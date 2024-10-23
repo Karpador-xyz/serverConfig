@@ -12,9 +12,6 @@
     initrd.availableKernelModules = [
       "uhci_hcd" "ehci_pci" "ata_piix" "usbhid" "usb_storage" "sd_mod"
     ];
-    initrd.kernelModules = [ ];
-    kernelModules = [ ];
-    extraModulePackages = [ ];
 
     # use latest kernel supported by zfs
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
