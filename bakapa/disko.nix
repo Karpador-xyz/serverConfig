@@ -23,7 +23,7 @@
     rootFsOptions = {
       mountpoint = "none";
       canmount = "off";
-      compression = "on";
+      compression = "zstd-10";
       relatime = "on";
       # https://openzfs.github.io/openzfs-docs/man/master/7/zfsprops.7.html#xattr
       xattr = "sa";
