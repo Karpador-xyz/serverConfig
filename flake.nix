@@ -13,13 +13,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.darwin.follows = "";
     };
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # my own stuff
     dt = {
       url = "gitlab:Follpvosten/dt-theme";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, unstable, deploy-rs, agenix, dt }: {
+  outputs = { self, nixpkgs, unstable, deploy-rs, agenix, disko, dt }: {
     nixosConfigurations = {
       kcloud-nix = nixpkgs.lib.nixosSystem rec {
         system = "aarch64-linux";
@@ -41,6 +47,14 @@
         specialArgs = {
           unstable = unstable.legacyPackages."${system}";
         };
+      };
+      bakapa = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./bakapa/configuration.nix
+          agenix.nixosModules.default
+          disko.nixosModules.disko
+        ];
       };
     };
 
