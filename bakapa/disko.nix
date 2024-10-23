@@ -21,6 +21,7 @@
   disko.devices.zpool.zroot = {
     type = "zpool";
     rootFsOptions = {
+      mountpoint = "none";
       canmount = "off";
       compression = "on";
       relatime = "on";
