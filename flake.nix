@@ -67,32 +67,8 @@
       };
     }; in {
       kcloud-nix = mkNode "kcloud-nix" "aarch64";
-      # kcloud-nix = {
-      #   sshUser = "root";
-      #   hostname = "kcloud-nix";
-      #   profiles.system = {
-      #     user = "root";
-      #     path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.kcloud-nix;
-      #   };
-      # };
       karp-zbox = mkNode "karp-zbox" "x86_64";
-      # karp-zbox = {
-      #   sshUser = "root";
-      #   hostname = "karp-zbox";
-      #   profiles.system = {
-      #     user = "root";
-      #     path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.karp-zbox;
-      #   };
-      # };
       bakapa = mkNode "bakapa" "x86_64";
-      # bakapa = {
-      #   sshUser = "root";
-      #   hostname = "bakapa";
-      #   profiles.system = {
-      #     user = "root";
-      #     path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.bakapa;
-      #   };
-      # };
     };
 
     # comment out if you don't have an aarch64 builder instance or
