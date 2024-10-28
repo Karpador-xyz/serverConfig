@@ -25,51 +25,49 @@
     };
   };
 
-  outputs = { self, nixpkgs, unstable, deploy-rs, agenix, disko, dt }: {
-    nixosConfigurations = {
-      kcloud-nix = nixpkgs.lib.nixosSystem rec {
-        system = "aarch64-linux";
+  outputs = { self, nixpkgs, unstable, deploy-rs, agenix, disko, dt }:
+  let
+    consts = import ./const.nix;
+    mkSystem = { name, system, extraModules?[], extraSpecialArgs?{} }:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
         modules = [
-          ./kcloud/configuration.nix
+          (./. + "/${name}/configuration.nix")
           agenix.nixosModules.default
-        ];
-        specialArgs = {
-          dtPkgs = dt.packages."${system}";
-          unstable = unstable.legacyPackages."${system}";
-        };
+        ] ++ extraModules;
+        specialArgs = { inherit consts; } // extraSpecialArgs;
       };
-      karp-zbox = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        modules = [
-          ./karp-zbox/configuration.nix
-          agenix.nixosModules.default
-        ];
-        specialArgs = {
-          unstable = unstable.legacyPackages."${system}";
-        };
-      };
-      bakapa = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./bakapa/configuration.nix
-          agenix.nixosModules.default
-          disko.nixosModules.disko
-        ];
-      };
-    };
-
-    deploy.nodes = let mkNode = name: arch: {
+    mkNode = { name, system, ... }: {
       sshUser = "root";
       hostname = name;
       profiles.system = {
         user = "root";
-        path = deploy-rs.lib."${arch}-linux".activate.nixos self.nixosConfigurations."${name}";
+        path = deploy-rs.lib."${system}".activate.nixos self.nixosConfigurations."${name}";
       };
-    }; in {
-      kcloud-nix = mkNode "kcloud-nix" "aarch64";
-      karp-zbox = mkNode "karp-zbox" "x86_64";
-      bakapa = mkNode "bakapa" "x86_64";
     };
+    systems = {
+      kcloud-nix = rec {
+        name = "kcloud-nix";
+        system = "aarch64-linux";
+        extraSpecialArgs = {
+          dtPkgs = dt.packages."${system}";
+          unstable = unstable.legacyPackages."${system}";
+        };
+      };
+      karp-zbox = rec {
+        name = "karp-zbox";
+        system = "x86_64-linux";
+        extraSpecialArgs.unstable = unstable.legacyPackages."${system}";
+      };
+      bakapa = {
+        name = "bakapa";
+        system = "x86_64-linux";
+        extraModules = [ disko.nixosModules.disko ];
+      };
+    };
+  in {
+    nixosConfigurations = builtins.mapAttrs (_name: system: mkSystem system) systems;
+    deploy.nodes = builtins.mapAttrs (_name: system: mkNode system) systems;
 
     # comment out if you don't have an aarch64 builder instance or
     # `boot.binfmt.emulatedSystems = [ "aarch64-linux" ];` set

@@ -4,6 +4,7 @@
     ./disko.nix
     ./hardware.nix
     ../common.nix
+    ./backups.nix
   ];
 
   networking.hostName = "bakapa";

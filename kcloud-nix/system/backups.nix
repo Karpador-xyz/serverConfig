@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, consts, ... }:
 {
   # user used by the pull backup host for login.
   users.groups.kbackup = {};
@@ -7,11 +7,7 @@
     group = "kbackup";
     shell = pkgs.bash;
     packages = with pkgs; [ mbuffer lzop ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOAPIaMz/QdIAbYSY9U556Igg7ZmPKDuZx7smqvdfMdD x@y"
-      # TODO: remove after migration is done
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC3yLSclgZ6eMfpe4CPhb/YX7/HxN1/0Icy4gf9noMmx wolfie@kcloud"
-    ];
+    openssh.authorizedKeys.keys = builtins.attrValues consts.sshKeys.kbackup;
   };
   # regular zfs snapshot config
   services.sanoid = {
