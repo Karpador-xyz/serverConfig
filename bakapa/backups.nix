@@ -27,11 +27,16 @@
       type = "zfs_fs";
       options.mountpoint = "none";
     };
+    # also need this one teehee 😋 (fuck you syncoid lol)
+    "bckp/kcloud-nix/DATA" = {
+      type = "zfs_fs";
+      options.mountpoint = "none";
+    };
   };
   # 3. ssh key. injected private key using agenix.
   age.secrets.kbackup-privkey = {
     file = ../secrets/kbackup-bakapa-privkey.age;
-    mode = "440";
+    mode = "400";
     owner = "kbackup";
     group = "kbackup";
   };
@@ -49,27 +54,18 @@
   systemd.services.kbackup-pull = {
     enable = true;
     description = "pull backups from hosts";
-    requires = [ "networking.target" ];
     path = [ pkgs.coreutils pkgs.sanoid ];
     script = ''
       set -e -o pipefail
 
       syncoid \
-        # do not use sudo or anything, we rely on zfs allow
         --no-privilege-elevation \
-        # secret-provided private key
         --sshkey=${config.age.secrets.kbackup-privkey.path} \
-        # we have sanoid set up, only sync scheduled snapshots
         --no-sync-snap \
-        # sync all datasets below DATA
         --recursive \
-        # do not sync DATA itself (it's empty)
         --skip-parent \
-        # delete old snapshots
         --delete-target-snapshots \
-        # source to pull from
-        kbackup@kcloud-nix:zroot/DATA \
-        # local target dataset
+        kbackup@karp.lol:zroot/DATA \
         zroot/bckp/kcloud-nix/DATA
     '';
     serviceConfig = {
