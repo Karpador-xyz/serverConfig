@@ -2,6 +2,7 @@
 {
   services.matrix-conduit = {
     enable = true;
+    package = unstable.conduwuit;
     settings.global = {
       server_name = "karp.lol";
       database_backend = "rocksdb";
