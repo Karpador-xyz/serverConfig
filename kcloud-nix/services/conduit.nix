@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, unstable, ... }:
 {
   services.matrix-conduit = {
     enable = true;
@@ -37,13 +37,24 @@
   services.nginx.virtualHosts."karp.lol" = lib.mkIf config.services.gotosocial.enable {
     locations = let
       common = ''types {} default_type "application/json; charset=utf-8";'';
+      serverJson = builtins.toJSON {
+        "m.server" = "mx.karp.lol:443";
+      };
+      clientJson = builtins.toJSON {
+        "m.homeserver" = {
+          base_url = "https://mx.karp.lol";
+        };
+        "org.matrix.msc3575.proxy" = {
+          url = "https://mx.karp.lol";
+        };
+      };
     in {
       "= /.well-known/matrix/server" = {
-        return = ''200 '{"m.server": "mx.karp.lol:443"}' '';
+        return = ''200 '${serverJson}' '';
         extraConfig = common;
       };
       "= /.well-known/matrix/client" = {
-        return = ''200 '{"m.homeserver":{"base_url":"https://mx.karp.lol"}}' '';
+        return = ''200 '${clientJson}' '';
         extraConfig = ''
           ${common}
           add_header "Access-Control-Allow-Origin" *;
