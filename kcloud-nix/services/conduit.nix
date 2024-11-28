@@ -12,6 +12,17 @@
       allow_registration = false;
       allow_encryption = true;
       allow_federation = true;
+      new_user_displayname_suffix = "";
+      # disable all presence
+      allow_local_presence = false;
+      allow_incoming_presence = false;
+      allow_outgoing_presence = false;
+      # and read receipts
+      allow_incoming_read_receipts = false;
+      allow_outgoing_read_receipts = false;
+      # and typing indicators
+      allow_incoming_typing = false;
+      allow_outgoing_typing = false;
     };
     extraEnvironment = {
       CONDUIT_LOG = "info";
