@@ -15,8 +15,8 @@
       log-level = "warn";
       # storage
       storage-backend = "s3";
-      storage-s3-endpoint = "s3.eu-central-003.backblazeb2.com";
-      storage-s3-bucket = "karp-lol-masto";
+      storage-s3-endpoint = "b5c1.fra1.idrivee2-95.com";
+      storage-s3-bucket = "karplol-gotosocial";
       # email
       smtp-host = "mail.karpador.xyz";
       smtp-port = 587;
