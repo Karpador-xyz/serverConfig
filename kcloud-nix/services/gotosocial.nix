@@ -23,9 +23,9 @@
       smtp-username = "gts@karpador.xyz";
       smtp-from = "gts@karpador.xyz";
       # media
-      media-remote-cache-days = 7;
+      media-remote-cache-days = 3;
       media-emoji-local-max-size = 102400;
-      media-emoji-remote-max-size = 409600;
+      media-emoji-remote-max-size = 1024 * 1024;
       media-description-min-chars = 64;
       http-client.timeout = "30s";
     };
