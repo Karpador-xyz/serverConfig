@@ -30,8 +30,8 @@
       mail_smtpport = "587";
       mail_smtpname = "wolke@karpador.xyz";
       mail_smtpsecure = "tls";
-      preview_max_x = 400;
-      preview_max_y = 400;
+      preview_max_x = 900;
+      preview_max_y = 900;
       preview_max_scale_factor = 1.5;
     };
     secretFile = config.age.secrets.nextcloud.path;
