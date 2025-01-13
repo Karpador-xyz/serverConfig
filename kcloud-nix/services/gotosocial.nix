@@ -23,7 +23,8 @@
       smtp-username = "gts@karpador.xyz";
       smtp-from = "gts@karpador.xyz";
       # media
-      media-remote-cache-days = 3;
+      media-remote-cache-days = 2;
+      media-cleanup-every = "8h";
       media-emoji-local-max-size = 102400;
       media-emoji-remote-max-size = 1024 * 1024;
       media-description-min-chars = 64;
