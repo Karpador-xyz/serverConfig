@@ -1,5 +1,6 @@
 { pkgs, consts, ... }:
-{
+let sylvie-keys = builtins.attrValues consts.sshKeys.sylvie;
+in {
   time.timeZone = "Europe/Vienna";
 
   # I am very evil
@@ -13,9 +14,9 @@
   users.users.sylvie = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keys = builtins.attrValues consts.sshKeys.sylvie;
+    openssh.authorizedKeys.keys = sylvie-keys;
   };
-  users.users.root.openssh.authorizedKeys.keys = builtins.attrValues consts.sshKeys.sylvie;
+  users.users.root.openssh.authorizedKeys.keys = sylvie-keys;
 
   # we also want ssh everywhere
   services.openssh.enable = true;
@@ -50,8 +51,5 @@
       experimental-features = [ "nix-command" "flakes" ];
       auto-optimise-store = true;
     };
-
-    # TODO what does this even do?
-    package = pkgs.nixFlakes;
   };
 }

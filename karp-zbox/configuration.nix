@@ -19,13 +19,13 @@
 
   networking.wireless = {
     enable = true;
-    environmentFile = config.age.secrets.wifi.path;
+    secretsFile = config.age.secrets.wifi.path;
     networks = {
       "LordOfThePings" = {
-        psk = "@LOTP_PSK@";
+        pskRaw = "ext:LOTP_PSK";
         priority = 1;
       };
-      "A1-D707D3".psk = "@A1_PSK@";
+      "A1-D707D3".pskRaw = "ext:A1_PSK";
     };
   };
 

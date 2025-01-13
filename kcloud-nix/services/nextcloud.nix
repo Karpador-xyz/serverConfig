@@ -12,10 +12,10 @@
     config = {
       dbtype = "pgsql";
       dbname = "nextcloud";
-      dbtableprefix = "oc_";
       adminpassFile = "${pkgs.writeText "apf" "nothing"}";
     };
     settings = {
+      dbtableprefix = "oc_";
       overwriteprotocol = "https";
       default_phone_region = "AT";
       maintenance_window_start = 1;
