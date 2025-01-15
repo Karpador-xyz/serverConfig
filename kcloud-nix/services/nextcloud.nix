@@ -35,7 +35,11 @@
       preview_max_scale_factor = 1.5;
     };
     secretFile = config.age.secrets.nextcloud.path;
-    phpOptions."opcache.interned_strings_buffer" = "9";
+    phpOptions."opcache.interned_strings_buffer" = "10";
+  };
+  services.nextcloud.autoUpdateApps = {
+    enable = true;
+    startAt = "04:30:00";
   };
   services.nginx.virtualHosts."${config.services.nextcloud.hostName}" = {
     addSSL = true;
