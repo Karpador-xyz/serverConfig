@@ -12,7 +12,7 @@
       "ata_piix" "uhci_hcd" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod"
     ];
 
-    kernelParams = [ "zfs.zfs_dmu_offset_next_sync=0" ];
+    kernelParams = [ "zfs.zfs_arc_max=67108864" ];
   };
 
   networking.useDHCP = lib.mkDefault true;

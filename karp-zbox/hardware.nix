@@ -13,9 +13,7 @@
       "uhci_hcd" "ehci_pci" "ata_piix" "usbhid" "usb_storage" "sd_mod"
     ];
 
-    # https://www.reddit.com/r/zfs/comments/1826lgs/psa_its_not_block_cloning_its_a_data_corruption/
-    # https://github.com/openzfs/zfs/issues/15526#issuecomment-1823737998
-    kernelParams = [ "zfs.zfs_dmu_offset_next_sync=0" ];
+    kernelParams = [ "zfs.zfs_arc_max=67108864" ];
   };
 
   fileSystems = {
