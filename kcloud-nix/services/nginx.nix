@@ -19,5 +19,6 @@
       serverAliases = ["www.dragontale.de"];
       locations."/".root = dtPkgs.website;
     };
+    virtualHosts."owo.karp.lol".locations."/".return = ''200 "what's this?" '';
   };
 }
