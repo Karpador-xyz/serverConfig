@@ -8,5 +8,6 @@
     ./nitter.nix
     ./postgres.nix
     ./vaultwarden.nix
+    ./owncast.nix
   ];
 }
