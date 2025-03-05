@@ -20,6 +20,7 @@ in {
   # wifi networks the zbox connects to
   "wifi.age".publicKeys = zbox-keys;
 
-  # bakapa
+  # backup access keys
   "kbackup-bakapa-privkey.age".publicKeys = bakapa-keys;
+  "kbackup-zbox-privkey.age".publicKeys = zbox-keys;
 }

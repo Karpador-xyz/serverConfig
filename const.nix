@@ -8,6 +8,7 @@
       bakapa = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFy0rbgaUIMQD1o0eOn80EVVmW3wo5jDaG+swPbbWxz/ kbackup@bakapa";
       # the old one, to be renamed tbh
       kbackup = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOAPIaMz/QdIAbYSY9U556Igg7ZmPKDuZx7smqvdfMdD kbackup@kbackup";
+      karp-zbox = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEvuUVZkGRNLms8wslsf7xUhyTyahuB778PbJrZfYp/L kbackup@karp-zbox";
     };
   };
   hostKeys = {

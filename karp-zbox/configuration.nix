@@ -3,6 +3,7 @@
   imports = [
     ./hardware.nix
     ../common.nix
+    ./backups.nix
     ./containers.nix
     ./jmusicbot.nix
   ];
