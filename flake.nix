@@ -37,12 +37,21 @@
         ] ++ extraModules;
         specialArgs = { inherit consts; } // extraSpecialArgs;
       };
-    mkNode = { name, system, ... }: {
+    mkNode = { name, system, ... }: let
+      pkgs = import nixpkgs { inherit system; };
+      deployPkgs = import nixpkgs {
+        inherit system;
+        overlays = [
+          deploy-rs.overlay # or deploy-rs.overlays.default
+          (self: super: { deploy-rs = { inherit (pkgs) deploy-rs; lib = super.deploy-rs.lib; }; })
+        ];
+      };
+    in {
       sshUser = "root";
       hostname = name;
       profiles.system = {
         user = "root";
-        path = deploy-rs.lib."${system}".activate.nixos self.nixosConfigurations."${name}";
+        path = deployPkgs.deploy-rs.lib.activate.nixos self.nixosConfigurations."${name}";
       };
     };
     systems = {
@@ -75,7 +84,7 @@
 
     devShells.x86_64-linux.default = nixpkgs.legacyPackages."x86_64-linux".mkShell {
       packages = [
-        deploy-rs.packages.x86_64-linux.deploy-rs
+        nixpkgs.legacyPackages.x86_64-linux.deploy-rs
         agenix.packages.x86_64-linux.default
       ];
     };
