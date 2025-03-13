@@ -30,8 +30,8 @@
       daily = 2;
     };
     datasets."zroot/DATA/pgbackup" = {
-      hourly = 1;
-      daily = 0;
+      hourly = 0;
+      daily = 1;
     };
   };
 }
