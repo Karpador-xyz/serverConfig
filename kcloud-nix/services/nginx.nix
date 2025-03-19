@@ -11,6 +11,7 @@
     recommendedTlsSettings = true;
     recommendedOptimisation = true;
     recommendedGzipSettings = true;
+    commonHttpConfig = "access_log off;";
 
     # NOTE: we'll usually want forceSSL, these are exceptions to that rule.
     virtualHosts."dragontale.de" = {
@@ -21,4 +22,5 @@
     };
     virtualHosts."owo.karp.lol".locations."/".return = ''200 "what's this?" '';
   };
+  services.logrotate.settings.nginx.rotate = 2;
 }
