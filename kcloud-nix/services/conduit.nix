@@ -32,6 +32,10 @@
     device = "zroot/DATA/conduit";
     fsType = "zfs";
   };
+  fileSystems."/var/lib/private/matrix-conduit/media" = {
+    device = "zroot/DATA/conduit/media";
+    fsType = "zfs";
+  };
   # enable this once we migrate gotosocial over; GtS runs on karp.lol, which
   # means also moving the .well-known entries here
   services.nginx.virtualHosts."karp.lol" = lib.mkIf config.services.gotosocial.enable {
