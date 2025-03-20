@@ -16,7 +16,6 @@
     kernelParams = [ "zfs.zfs_arc_max=67108864" ];
   };
 
-  # TODO include the zroot/DATA dataset, maybe encrypted?
   fileSystems = {
     "/" = {
       device = "zroot/nixos";
