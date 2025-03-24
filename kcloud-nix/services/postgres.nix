@@ -4,11 +4,14 @@
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_16;
-    # optimize properly for zfs
     settings = {
+      # optimize properly for zfs
       full_page_writes = "off";
       wal_init_zero = "off";
       wal_recycle = "off";
+      # optimise in general
+      shared_buffers = "1GB";
+      work_mem = "256MB";
     };
     ensureDatabases = [ "gotosocial" "nextcloud" ];
     ensureUsers = [
