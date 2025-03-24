@@ -25,6 +25,10 @@
       device = "zroot/nix";
       fsType = "zfs";
     };
+    "/var/log" = {
+      device = "zroot/log";
+      fsType = "zfs";
+    };
     "/boot" = {
       device = "/dev/disk/by-uuid/88c4af2b-0ebe-4689-88b1-3c26b46e7e8a";
       fsType = "ext4";
