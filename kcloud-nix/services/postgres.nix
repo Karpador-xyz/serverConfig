@@ -35,7 +35,8 @@
     enable = true;
     backupAll = true;
     compression = "none";
-    startAt = "*-*-* *:50:00";
+    # one of those per day
+    startAt = "*-*-* 23:00:00";
   };
   fileSystems."${config.services.postgresqlBackup.location}" = {
     device = "zroot/DATA/pgbackup";
