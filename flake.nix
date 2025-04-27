@@ -60,7 +60,10 @@
         system = "aarch64-linux";
         extraSpecialArgs = {
           dtPkgs = dt.packages."${system}";
-          unstable = unstable.legacyPackages."${system}";
+          unstable = import unstable {
+            inherit system;
+            config.permittedInsecurePackages = ["conduwuit-0.4.6"];
+          };
         };
       };
       karp-zbox = rec {
