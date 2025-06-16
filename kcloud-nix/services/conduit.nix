@@ -1,13 +1,15 @@
 { config, lib, unstable, ... }:
-{
-  services.matrix-conduit = {
+let
+  address = "127.0.0.1";
+  port = 6167;
+in {
+  services.matrix-continuwuity = {
     enable = true;
-    package = unstable.conduwuit;
+    package = unstable.matrix-continuwuity;
     settings.global = {
       server_name = "karp.lol";
-      database_backend = "rocksdb";
-      address = "127.0.0.1";
-      port = 6167;
+      address = [address];
+      port = [port];
       trusted_servers = ["matrix.org"];
       allow_registration = false;
       allow_encryption = true;
@@ -25,15 +27,15 @@
       allow_outgoing_typing = false;
     };
     extraEnvironment = {
-      CONDUIT_LOG = "info";
+      CONTINUWUITY_LOG = "info";
     };
   };
-  fileSystems."/var/lib/private/matrix-conduit" = {
-    device = "zroot/DATA/conduit";
+  fileSystems."/var/lib/private/continuwuity" = {
+    device = "zroot/DATA/continuwuity";
     fsType = "zfs";
   };
-  fileSystems."/var/lib/private/matrix-conduit/media" = {
-    device = "zroot/DATA/conduit/media";
+  fileSystems."/var/lib/private/continuwuity/media" = {
+    device = "zroot/DATA/continuwuity/media";
     fsType = "zfs";
   };
   # enable this once we migrate gotosocial over; GtS runs on karp.lol, which
@@ -66,11 +68,11 @@
       };
     };
   };
-  services.nginx.virtualHosts."mx.karp.lol" = lib.mkIf config.services.matrix-conduit.enable {
+  services.nginx.virtualHosts."mx.karp.lol" = lib.mkIf config.services.matrix-continuwuity.enable {
     forceSSL = true;
     enableACME = true;
-    locations."/" = let cfg = config.services.matrix-conduit.settings.global; in {
-      proxyPass = "http://${cfg.address}:${toString cfg.port}";
+    locations."/" = {
+      proxyPass = "http://${address}:${toString port}";
       proxyWebsockets = true;
     };
     extraConfig = ''

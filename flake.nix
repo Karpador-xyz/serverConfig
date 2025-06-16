@@ -2,7 +2,7 @@
   description = "kcloud server config";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-24.11-small";
+    nixpkgs.url = "nixpkgs/nixos-25.05-small";
     unstable.url = "nixpkgs/nixos-unstable-small";
     deploy-rs = {
       url = "github:serokell/deploy-rs";
@@ -42,7 +42,7 @@
       deployPkgs = import nixpkgs {
         inherit system;
         overlays = [
-          deploy-rs.overlay # or deploy-rs.overlays.default
+          deploy-rs.overlays.default
           (self: super: { deploy-rs = { inherit (pkgs) deploy-rs; lib = super.deploy-rs.lib; }; })
         ];
       };
@@ -60,10 +60,7 @@
         system = "aarch64-linux";
         extraSpecialArgs = {
           dtPkgs = dt.packages."${system}";
-          unstable = import unstable {
-            inherit system;
-            config.permittedInsecurePackages = ["conduwuit-0.4.6"];
-          };
+          unstable = unstable.legacyPackages."${system}";
         };
       };
       karp-zbox = rec {
