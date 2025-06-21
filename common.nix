@@ -21,7 +21,7 @@ in {
   # we also want ssh everywhere
   services.openssh.enable = true;
   services.openssh.settings = {
-    PermitRootLogin = "without-password";
+    PermitRootLogin = "prohibit-password";
     PasswordAuthentication = false;
     KbdInteractiveAuthentication = false;
   };
