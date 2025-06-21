@@ -73,6 +73,10 @@
         system = "x86_64-linux";
         extraModules = [ disko.nixosModules.disko ];
       };
+      moo = {
+        name = "moo";
+        system = "x86_64-linux";
+      };
     };
   in {
     nixosConfigurations = builtins.mapAttrs (_name: system: mkSystem system) systems;
