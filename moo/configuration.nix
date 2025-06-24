@@ -3,6 +3,7 @@
   imports = [
     ./hardware.nix
     ../common.nix
+    ./docker.nix
   ];
 
   networking.hostName = "moo";
