@@ -16,7 +16,7 @@
       # storage
       storage-backend = "s3";
       storage-s3-endpoint = "b5c1.fra1.idrivee2-95.com";
-      storage-s3-bucket = "karplol-gotosocial";
+      storage-s3-bucket = "karp-gts";
       # email
       smtp-host = "mail.karpador.xyz";
       smtp-port = 587;
