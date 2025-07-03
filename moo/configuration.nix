@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./hardware.nix
@@ -17,6 +17,8 @@
     address = "fe80::1";
     interface = "ens3";
   };
+
+  environment.systemPackages = [ pkgs.gitMinimal ];
 
   system.stateVersion = "25.05";
 }
