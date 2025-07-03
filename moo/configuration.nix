@@ -4,6 +4,7 @@
     ./hardware.nix
     ../common.nix
     ./docker.nix
+    ./mailcow.nix
   ];
 
   networking.hostName = "moo";

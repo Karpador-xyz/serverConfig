@@ -4,6 +4,10 @@
     device = "zroot/docker";
     fsType = "zfs";
   };
+  fileSystems."/var/lib/docker/volumes" = {
+    device = "zroot/data/docker-volumes";
+    fsType = "zfs";
+  };
 
   virtualisation.docker = {
     enable = true;
