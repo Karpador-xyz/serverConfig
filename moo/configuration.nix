@@ -18,7 +18,7 @@
     interface = "ens3";
   };
 
-  environment.systemPackages = [ pkgs.gitMinimal ];
+  users.users.root.packages = [ pkgs.gitMinimal pkgs.openssl ];
 
   system.stateVersion = "25.05";
 }
