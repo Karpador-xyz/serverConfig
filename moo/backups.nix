@@ -1,5 +1,15 @@
-{ ... }:
+{ pkgs, consts, ... }:
 {
+  # user used by the pull backup host for login.
+  users.groups.kbackup = {};
+  users.users.kbackup = {
+    isSystemUser = true;
+    group = "kbackup";
+    shell = pkgs.bash;
+    packages = with pkgs; [ mbuffer lzop ];
+    openssh.authorizedKeys.keys = builtins.attrValues consts.sshKeys.kbackup;
+  };
+  # automated zfs snapshots
   services.sanoid = {
     enable = true;
     datasets."zroot/data" = {
