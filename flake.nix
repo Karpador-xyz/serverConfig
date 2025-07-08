@@ -28,7 +28,7 @@
   outputs = { self, nixpkgs, unstable, deploy-rs, agenix, disko, dt }:
   let
     consts = import ./const.nix;
-    mkSystem = { name, system, extraModules?[], extraSpecialArgs?{} }:
+    mkSystem = { name, system, extraModules?[], extraSpecialArgs?{}, ... }:
       nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
@@ -37,7 +37,7 @@
         ] ++ extraModules;
         specialArgs = { inherit consts; } // extraSpecialArgs;
       };
-    mkNode = { name, system, ... }: let
+    mkNode = { name, system, extraProfiles?{}, ... }: let
       pkgs = import nixpkgs { inherit system; };
       deployPkgs = import nixpkgs {
         inherit system;
@@ -49,10 +49,12 @@
     in {
       sshUser = "root";
       hostname = name;
-      profiles.system = {
-        user = "root";
-        path = deployPkgs.deploy-rs.lib.activate.nixos self.nixosConfigurations."${name}";
-      };
+      profiles = {
+        system = {
+          user = "root";
+          path = deployPkgs.deploy-rs.lib.activate.nixos self.nixosConfigurations."${name}";
+        };
+      } // builtins.mapAttrs (_name: f: f nixpkgs deployPkgs) extraProfiles;
     };
     systems = {
       kcloud-nix = rec {
@@ -76,6 +78,14 @@
       moo = {
         name = "moo";
         system = "x86_64-linux";
+        extraProfiles.update-mailcow = nixpkgs: deployPkgs: {
+          user = "root";
+          confirmTimeout = 600;
+          autoRollback = false;
+          path = deployPkgs.deploy-rs.lib.activate.custom
+            (import ./moo/update-mailcow.nix nixpkgs)
+            "./bin/activate";
+        };
       };
     };
   in {

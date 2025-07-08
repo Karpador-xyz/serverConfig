@@ -35,13 +35,15 @@
     script = ''
       set -e -o pipefail
 
-      syncoid \
-        --no-privilege-elevation \
+      # common options
+      OPTIONS="--no-privilege-elevation \
         --sshkey=${config.age.secrets.kbackup-privkey.path} \
         --no-sync-snap \
         --recursive \
         --skip-parent \
-        --delete-target-snapshots \
+        --delete-target-snapshots";
+
+      syncoid $OPTIONS \
         kbackup@karp.lol:zroot/DATA \
         zroot/bckp/kcloud-nix/DATA
     '';
