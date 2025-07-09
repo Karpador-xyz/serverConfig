@@ -80,8 +80,10 @@
         system = "x86_64-linux";
         extraProfiles.update-mailcow = nixpkgs: deployPkgs: {
           user = "root";
-          confirmTimeout = 600;
+          activationTimeout = 600;
+          confirmTimeout = 60;
           autoRollback = false;
+          magicRollback = false;
           path = deployPkgs.deploy-rs.lib.activate.custom
             (import ./moo/update-mailcow.nix nixpkgs)
             "./bin/activate";
