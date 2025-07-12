@@ -49,6 +49,8 @@
     in {
       sshUser = "root";
       hostname = name;
+      # always deploy the "system" profile first
+      profilesOrder = [ "system" ];
       profiles = {
         system = {
           user = "root";
