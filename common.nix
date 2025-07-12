@@ -52,4 +52,7 @@ in {
       auto-optimise-store = true;
     };
   };
+
+  # nixos, why...just why...
+  boot.zfs.forceImportRoot = false;
 }
