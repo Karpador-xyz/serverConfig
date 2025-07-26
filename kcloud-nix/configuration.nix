@@ -16,6 +16,7 @@
       group = "nextcloud";
       mode = "770";
     };
+    molly.file = ../secrets/molly.age;
   };
 
   networking.hostName = "kcloud-nix";

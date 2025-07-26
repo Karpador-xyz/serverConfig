@@ -23,4 +23,19 @@
       proxyPass = "http://${config.services.ntfy-sh.settings.listen-http}";
     };
   };
+
+  services.mollysocket = {
+    enable = true;
+    settings.allowed_endpoints = [config.services.ntfy-sh.settings.base-url];
+    environmentFile = config.age.secrets.molly.path;
+  };
+  services.nginx.virtualHosts."molly.karp.lol" = {
+    forceSSL = true;
+    enableACME = true;
+    locations."/" = {
+      recommendedProxySettings = true;
+      proxyPass = with config.services.mollysocket.settings;
+        "http://${host}:${toString port}";
+    };
+  };
 }
