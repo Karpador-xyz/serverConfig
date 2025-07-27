@@ -14,6 +14,7 @@ in {
   "gts.age".publicKeys = kcloud-keys;
   "nextcloud.age".publicKeys = kcloud-keys;
   "molly.age".publicKeys = kcloud-keys;
+  "mautrix-discord.age".publicKeys = kcloud-keys;
 
   # telegram bots running on the little zbox
   "godfish.age".publicKeys = zbox-keys;

@@ -25,7 +25,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, unstable, deploy-rs, agenix, disko, dt }:
+  outputs = { self, nixpkgs, unstable, deploy-rs, agenix, disko, dt }@inputs:
   let
     consts = import ./const.nix;
     mkSystem = { name, system, extraModules?[], extraSpecialArgs?{}, ... }:
@@ -35,7 +35,7 @@
           (./. + "/${name}/configuration.nix")
           agenix.nixosModules.default
         ] ++ extraModules;
-        specialArgs = { inherit consts; } // extraSpecialArgs;
+        specialArgs = { inherit consts inputs; } // extraSpecialArgs;
       };
     mkNode = { name, system, extraProfiles?{}, ... }: let
       pkgs = import nixpkgs { inherit system; };
@@ -64,7 +64,11 @@
         system = "aarch64-linux";
         extraSpecialArgs = {
           dtPkgs = dt.packages."${system}";
-          unstable = unstable.legacyPackages."${system}";
+          unstable = import unstable {
+            inherit system;
+            # mautrix-discord pulls this in even when not using encryption
+            config.permittedInsecurePackages = ["olm-3.2.16"];
+          };
         };
       };
       karp-zbox = rec {
