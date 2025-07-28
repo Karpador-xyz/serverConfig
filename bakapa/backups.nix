@@ -39,7 +39,7 @@
   # all of the ingredients listed above, and a timer to start it periodically.
   # bonus points if I can do it without a home dir.
   systemd.services.kbackup-pull = {
-    enable = true;
+    enable = false;
     description = "pull backups from hosts";
     path = [ pkgs.coreutils pkgs.sanoid ];
     script = ''

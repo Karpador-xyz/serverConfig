@@ -10,5 +10,5 @@
   networking.hostName = "bakapa";
   networking.hostId = "a9584e08";
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.05";
 }

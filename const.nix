@@ -14,7 +14,7 @@
   hostKeys = {
     kcloud-nix = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGELE5ltBEMgxZV0F14CyE/Fd7k8DkdFNUot3QGmgqLX";
     karp-zbox = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILLvfpJKDDTVZypyN4iDxFHQR7oxquYLgPNbE/G/Mw23";
-    bakapa = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMpY7cEtIVtFSi9noQGcNnKlYk8jZkuLIhzj/9Q/N4UX";
+    bakapa = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFcgpkl0HHBV8BtrfpbjqmEwdxud2nIH8287EzokBoG3";
     moo = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKlOiaIMcXRCVnlr2Z/MjfQfP/DKK16ziYoLmkVcnmpq";
   };
 }

@@ -25,7 +25,9 @@
     };
   };
 
-  outputs = { self, nixpkgs, unstable, deploy-rs, agenix, disko, dt }@inputs:
+  outputs = {
+    self, nixpkgs, unstable, deploy-rs, agenix, disko, dt
+  }@inputs:
   let
     consts = import ./const.nix;
     mkSystem = { name, system, extraModules?[], extraSpecialArgs?{}, ... }:
@@ -103,6 +105,10 @@
     # comment out if you don't have an aarch64 builder instance or
     # `boot.binfmt.emulatedSystems = [ "aarch64-linux" ];` set
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+
+    packages.x86_64-linux = {
+      bakapa-image = self.nixosConfigurations.bakapa.config.system.build.diskoImages;
+    };
 
     devShells.x86_64-linux.default = nixpkgs.legacyPackages."x86_64-linux".mkShell {
       packages = [

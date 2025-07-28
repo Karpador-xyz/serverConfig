@@ -1,8 +1,9 @@
 { ... }:
 {
   disko.devices.disk.main = {
+    imageSize = "10G";
     type = "disk";
-    device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";
+    device = "/dev/vda";
     content = {
       type = "gpt";
       partitions.MBR = {
@@ -10,48 +11,48 @@
         size = "1M";
         priority = 1; # Needs to be first partition
       };
-      partitions.boot = {
-        size = "1G";
-        content = {
-          type = "filesystem";
-          format = "vfat";
-          mountpoint = "/boot";
-        };
-        priority = 2;
-        hybrid.mbrBootableFlag = true;
-      };
-      partitions.zroot = {
+      partitions.root = {
         size = "100%";
         content = {
-          type = "zfs";
-          pool = "zroot";
+          type = "filesystem";
+          format = "ext4";
+          mountpoint = "/";
         };
       };
+      # partitions.zroot = {
+      #   size = "100%";
+      #   content = {
+      #     type = "zfs";
+      #     pool = "zroot";
+      #   };
+      # };
     };
   };
-  disko.devices.zpool.zroot = {
-    type = "zpool";
-    rootFsOptions = {
-      mountpoint = "none";
-      canmount = "off";
-      compression = "zstd-10";
-      relatime = "on";
-      # https://openzfs.github.io/openzfs-docs/man/master/7/zfsprops.7.html#xattr
-      xattr = "sa";
-    };
-    options.ashift = "12";
+  # disko.devices.zpool.zroot = {
+  #   type = "zpool";
+  #   rootFsOptions = {
+  #     mountpoint = "none";
+  #     canmount = "off";
+  #     compression = "zstd-6";
+  #     relatime = "on";
+  #     # https://openzfs.github.io/openzfs-docs/man/master/7/zfsprops.7.html#xattr
+  #     xattr = "sa";
+  #   };
+  #   options.ashift = "12";
 
-    datasets = let fs = mountpoint: {
-      type = "zfs_fs";
-      options.mountpoint = "legacy";
-      inherit mountpoint;
-    }; in {
-      # root fs - no impermanence for now
-      "nixos" = fs "/";
-      # nix store
-      "nix" = fs "/nix";
-      # for home folder
-      "home" = fs "/home";
-    };
-  };
+  #   datasets = let fs = mountpoint: {
+  #     type = "zfs_fs";
+  #     options.mountpoint = "legacy";
+  #     inherit mountpoint;
+  #   }; in {
+  #     # root fs - no impermanence for now
+  #     "root" = fs "/";
+  #     # nix store
+  #     "nix" = fs "/nix";
+  #     # logs
+  #     "log" = fs "/var/log";
+  #     # for home folder
+  #     "home" = fs "/home";
+  #   };
+  # };
 }
