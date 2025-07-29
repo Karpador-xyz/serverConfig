@@ -1,4 +1,4 @@
-{ pkgs, consts, ... }:
+{ pkgs, consts, lib, ... }:
 let sylvie-keys = builtins.attrValues consts.sshKeys.sylvie;
 in {
   time.timeZone = "Europe/Vienna";
@@ -54,5 +54,5 @@ in {
   };
 
   # nixos, why...just why...
-  boot.zfs.forceImportRoot = false;
+  boot.zfs.forceImportRoot = lib.mkDefault false;
 }
