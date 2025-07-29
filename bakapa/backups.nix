@@ -33,32 +33,52 @@
       extraHostNames = [ "karp.lol" "152.53.16.62" ];
       publicKey = consts.hostKeys.kcloud-nix;
     };
+    moo = {
+      extraHostNames = [
+        "mail.karpador.xyz" "5.45.102.194" "2a03:4000:6:1be::1" "100.117.129.88"
+      ];
+      publicKey = consts.hostKeys.moo;
+    };
   };
-  
+
   # 5. finally, need a systemd oneshot unit that actually pulls snapshots using
   # all of the ingredients listed above, and a timer to start it periodically.
   # bonus points if I can do it without a home dir.
   systemd.services.kbackup-pull = {
-    enable = false;
+    enable = true;
     description = "pull backups from hosts";
     path = [ pkgs.coreutils pkgs.sanoid ];
     script = ''
       set -e -o pipefail
 
-      syncoid \
-        --no-privilege-elevation \
-        --sshkey=${config.age.secrets.kbackup-privkey.path} \
-        --no-sync-snap \
-        --recursive \
-        --skip-parent \
-        --delete-target-snapshots \
-        kbackup@karp.lol:zroot/DATA \
+      # common options
+      # we are using `zfs allow` to delegate the required permissions
+      OPTIONS="--no-privilege-elevation"
+      # use the ssh key provided by the secrets
+      OPTIONS="--sshkey=${config.age.secrets.kbackup-privkey.path} $OPTIONS"
+      # no sync snap - we are using sanoid on the source hosts
+      OPTIONS="--no-sync-snap $OPTIONS"
+      # the root source datasets are always gonna be empty
+      OPTIONS="--recursive --skip-parent $OPTIONS"
+      # don't keep old snapshots around
+      OPTIONS="--delete-target-snapshots $OPTIONS"
+
+      # the everything host
+      echo syncing kcloud-nix...
+      syncoid $OPTIONS \
+        kbackup@kcloud-nix:zroot/DATA \
         zroot/bckp/kcloud-nix/DATA
+
+      # the mail server
+      echo syncing moo...
+      syncoid $OPTIONS \
+        kbackup@moo:zroot/data \
+        zroot/bckp/moo/data
     '';
     serviceConfig = {
       Type = "oneshot";
       User = "kbackup";
     };
-    startAt = "*-*-* *:05:00";
+    startAt = "*-*-* *:10:00";
   };
 }
