@@ -22,11 +22,13 @@
     enable = true;
     secretsFile = config.age.secrets.wifi.path;
     networks = {
-      "LordOfThePings" = {
-        pskRaw = "ext:LOTP_PSK";
+      "A1-D707D3" = {
+        pskRaw = "ext:A1_PSK";
         priority = 1;
       };
-      "A1-D707D3".pskRaw = "ext:A1_PSK";
+      "LordOfThePings" = {
+        pskRaw = "ext:LOTP_PSK";
+      };
     };
   };
 
