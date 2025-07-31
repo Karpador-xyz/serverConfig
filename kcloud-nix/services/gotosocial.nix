@@ -33,6 +33,10 @@
     environmentFile = config.age.secrets.gts.path;
     setupPostgresqlDB = true;
   };
+  systemd.services.gotosocial = {
+    after = [ "network-online.target" ];
+    requires = [ "network-online.target" ];
+  };
   services.nginx.virtualHosts."karp.lol" = lib.mkIf config.services.gotosocial.enable {
     forceSSL = true;
     enableACME = true;
