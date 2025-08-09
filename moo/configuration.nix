@@ -10,6 +10,12 @@
 
   networking.hostName = "moo";
   networking.hostId = "7e35a6d4";
+  networking.firewall.allowedTCPPorts = [
+    # HTTP(S)
+    80 443
+    # E-Mail
+    25 465 587 143 993 110 995
+  ];
 
   networking.interfaces.ens3.ipv6.addresses = [{
     address = "2a03:4000:6:1be::1";
