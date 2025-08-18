@@ -38,7 +38,7 @@
   disko.devices.mdadm = {
     esp = {
       type = "mdadm";
-      level = 1;
+      level = 0;
       metadata = "1.0";
       content = {
         type = "filesystem";
