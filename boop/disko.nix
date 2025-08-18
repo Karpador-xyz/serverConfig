@@ -6,6 +6,10 @@
     content = {
       type = "gpt";
       partitions = {
+        mbr = {
+          size = "1M";
+          type = "EF02";
+        };
         esp-mirror = {
           size = "1G";
           type = "EF00";
@@ -78,6 +82,6 @@
     };
   };
   boot.swraid.mdadmConf = ''
-    MAILADDR=sylvie@karpador.xyz
+    MAILADDR sylvie@karpador.xyz
   '';
 }

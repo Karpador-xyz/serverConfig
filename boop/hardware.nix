@@ -3,8 +3,12 @@
   imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
   boot = {
-    loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
+    loader.grub = {
+      enable = true;
+      zfsSupport = true;
+      efiSupport = true;
+    };
 
     zfs.devNodes = "/dev/disk/by-partlabel";
 
