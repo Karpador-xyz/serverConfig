@@ -17,6 +17,7 @@
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     # my own stuff
     dt = {
@@ -26,7 +27,7 @@
   };
 
   outputs = {
-    self, nixpkgs, unstable, deploy-rs, agenix, disko, dt
+    self, nixpkgs, unstable, deploy-rs, agenix, disko, dt, nixos-hardware
   }@inputs:
   let
     consts = import ./const.nix;
@@ -96,6 +97,14 @@
             (import ./moo/update-mailcow.nix nixpkgs)
             "./bin/activate";
         };
+      };
+      boop = {
+        name = "boop";
+        system = "x86_64-linux";
+        extraModules = [
+          disko.nixosModules.disko
+          nixos-hardware.nixosModules.hardkernel-odroid-h3
+        ];
       };
     };
   in {
