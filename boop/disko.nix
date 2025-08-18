@@ -8,6 +8,7 @@
       partitions = {
         esp-mirror = {
           size = "1G";
+          type = "EF00";
           content = {
             type = "mdraid";
             name = "esp";
@@ -34,29 +35,18 @@
     esp = {
       type = "mdadm";
       level = 1;
+      metadata = "1.0";
       content = {
-        type = "gpt";
-        partitions.esp = {
-          size = "100%";
-          content = {
-            type = "filesystem";
-            format = "vfat";
-            mountpoint = "/boot";
-            mountOptions = [ "umask=0077" ];
-          };
-        };
+        type = "filesystem";
+        format = "vfat";
+        mountpoint = "/boot";
+        mountOptions = [ "umask=0077" ];
       };
     };
     swap = {
       type = "mdadm";
       level = 0;
-      content = {
-        type = "gpt";
-        partitions.swap = {
-          size = "100%";
-          content.type = "swap";
-        };
-      };
+      content.type = "swap";
     };
   };
   disko.devices.zpool.zroot = {
