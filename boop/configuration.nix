@@ -1,5 +1,9 @@
 { pkgs, ... }:
-{
+let
+  kodi = pkgs.kodi-wayland.withPackages (kodiPkgs: with kodiPkgs; [
+    vfs-sftp
+  ]);
+in {
   imports = [
     ./disko.nix
     ./hardware.nix
@@ -8,7 +12,7 @@
 
   users.users.kodi.isNormalUser = true;
   services.cage.user = "kodi";
-  services.cage.program = "${pkgs.kodi-wayland}/bin/kodi-standalone";
+  services.cage.program = "${kodi}/bin/kodi-standalone";
   services.cage.enable = true;
 
   networking.hostName = "boop";
