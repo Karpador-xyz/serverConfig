@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   kodi = pkgs.kodi-wayland.withPackages (kodiPkgs: with kodiPkgs; [
-    vfs-sftp
+    vfs-sftp bluetooth-manager youtube orftvthek keymap
   ]);
 in {
   imports = [
