@@ -1,4 +1,4 @@
-{ pkgs, consts, lib, ... }:
+{ pkgs, consts, lib, unstable, ... }:
 let sylvie-keys = builtins.attrValues consts.sshKeys.sylvie;
 in {
   time.timeZone = "Europe/Vienna";
@@ -28,6 +28,7 @@ in {
 
   # and tailscale
   services.tailscale.enable = true;
+  services.tailscale.package = unstable.tailscale;
   systemd.services.tailscaled = {
     after = [ "network-online.target" ];
     wants = [ "network-online.target" ];
