@@ -38,7 +38,10 @@
           (./. + "/${name}/configuration.nix")
           agenix.nixosModules.default
         ] ++ extraModules;
-        specialArgs = { inherit consts inputs; } // extraSpecialArgs;
+        specialArgs = {
+          inherit consts inputs;
+          unstable = unstable.legacyPackages."${system}";
+        } // extraSpecialArgs;
       };
     mkNode = { name, system, extraProfiles?{}, ... }: let
       pkgs = import nixpkgs { inherit system; };
@@ -74,10 +77,9 @@
           };
         };
       };
-      karp-zbox = rec {
+      karp-zbox = {
         name = "karp-zbox";
         system = "x86_64-linux";
-        extraSpecialArgs.unstable = unstable.legacyPackages."${system}";
       };
       bakapa = {
         name = "bakapa";
