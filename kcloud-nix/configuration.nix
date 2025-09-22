@@ -16,7 +16,6 @@
       group = "nextcloud";
       mode = "770";
     };
-    molly.file = ../secrets/molly.age;
     mautrix-discord = {
       file = ../secrets/mautrix-discord.age;
       owner = "mautrix-discord";
