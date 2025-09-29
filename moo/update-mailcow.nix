@@ -4,7 +4,7 @@ in pkgs.writeShellApplication {
   name = "activate";
   runtimeInputs = with pkgs; [
     coreutils gnused bashNonInteractive docker-client which curl
-    gitMinimal iptables
+    gitMinimal iptables jq
   ];
   text = ''
     cd /opt/mailcow-dockerized
