@@ -7,7 +7,7 @@
       type = "gpt";
       partitions = {
         ESP = {
-          size = "1G";
+          size = "4G"; # trust me on this lol
           type = "EF00";
           content = {
             type = "filesystem";
@@ -16,14 +16,14 @@
             mountOptions = [ "umask=0077" ];
           };
         };
-        swap-stripe = {
+        swap = {
           size = "16G";
           content = {
-            type = "mdraid";
-            name = "swap";
+            type = "swap";
+            randomEncryption = true;
           };
         };
-        zroot = {
+        zfs = {
           size = "100%";
           content = {
             type = "zfs";
@@ -33,13 +33,29 @@
       };
     };
   };
-  disko.devices.mdadm.swap = {
-    type = "mdadm";
-    level = 0;
-    content.type = "swap";
+  disko.devices.disk.root-mirror = {
+    type = "disk";
+    device = "/dev/disk/by-id/nvme-CT480E100SSD8_2502EAC8AB08";
+    content = {
+      type = "gpt";
+      partitions.zfs = {
+        size = "100%";
+        content = {
+          type = "zfs";
+          pool = "zroot";
+        };
+      };
+    };
   };
   disko.devices.zpool.zroot = {
     type = "zpool";
+    mode.topology = {
+      type = "topology";
+      vdev = [{
+        mode = "mirror";
+        members = ["main" "root-mirror"];
+      }];
+    };
     rootFsOptions = {
       mountpoint = "none";
       canmount = "off";
