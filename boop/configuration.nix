@@ -12,6 +12,7 @@ in {
   imports = [
     ./disko.nix
     ./hardware.nix
+    ./jellyfin.nix
     ../common.nix
   ];
 
@@ -22,6 +23,8 @@ in {
 
   networking.hostName = "boop";
   networking.hostId = "8425e349";
+
+  users.users.root.packages = with pkgs; [ sanoid mbuffer lzop ];
 
   system.stateVersion = "25.05";
 }
