@@ -7,7 +7,7 @@
   };
   # TODO move to zroot
   fileSystems."${config.services.jellyfin.dataDir}" = {
-    device = "zdata/jellyfin";
+    device = "zroot/data/jellyfin";
     fsType = "zfs";
   };
 }
