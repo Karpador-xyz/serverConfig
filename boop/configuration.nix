@@ -31,5 +31,7 @@ in {
 
   users.users.root.packages = with pkgs; [ sanoid mbuffer lzop ];
 
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
+
   system.stateVersion = "25.05";
 }
