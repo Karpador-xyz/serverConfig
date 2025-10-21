@@ -16,5 +16,6 @@
     karp-zbox = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILLvfpJKDDTVZypyN4iDxFHQR7oxquYLgPNbE/G/Mw23";
     bakapa = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOh9hQEUw2D8iyicdUGs+5L8WvhM/1NRLNggbkwDeNCb";
     moo = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKlOiaIMcXRCVnlr2Z/MjfQfP/DKK16ziYoLmkVcnmpq";
+    boop = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAiI1vhI6kDmZ7Ixb1iaT9iWjkdcgESNqmPTcb8VxHT7";
   };
 }

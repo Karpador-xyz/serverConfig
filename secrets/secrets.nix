@@ -3,11 +3,12 @@ let
   inherit (consts.sshKeys.sylvie) godemiche tzuyu;
   local-keys = [ godemiche tzuyu ];
 
-  inherit (consts.hostKeys) kcloud-nix karp-zbox bakapa moo;
+  inherit (consts.hostKeys) kcloud-nix karp-zbox bakapa moo boop;
   kcloud-keys = local-keys ++ [ kcloud-nix ];
   zbox-keys = local-keys ++ [ karp-zbox ];
   bakapa-keys = local-keys ++ [ bakapa ];
   moo-keys = local-keys ++ [ moo ];
+  boop-keys = local-keys ++ [ boop ];
 in {
   # main service keys for kcloud
   "vaultwarden.age".publicKeys = kcloud-keys;
@@ -29,4 +30,7 @@ in {
   # backup access keys
   "kbackup-bakapa-privkey.age".publicKeys = bakapa-keys;
   "kbackup-zbox-privkey.age".publicKeys = zbox-keys;
+
+  # boop
+  "transmission.age".publicKeys = boop-keys;
 }

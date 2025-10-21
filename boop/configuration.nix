@@ -13,8 +13,13 @@ in {
     ./disko.nix
     ./hardware.nix
     ./jellyfin.nix
+    ./transmission.nix
     ../common.nix
   ];
+
+  age.secrets = {
+    transmission.file = ../secrets/transmission.age;
+  };
 
   users.users.kodi.isNormalUser = true;
   services.cage.user = "kodi";
