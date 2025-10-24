@@ -7,6 +7,8 @@
     loader.efi.canTouchEfiVariables = true;
 
     zfs.devNodes = "/dev/disk/by-partlabel";
+    # import the data pool at boot
+    zfs.extraPools = ["zdata"];
 
     initrd.availableKernelModules = [
       "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sdhci_pci"
