@@ -33,5 +33,7 @@ in {
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
 
+  services.tailscale.useRoutingFeatures = "server";
+
   system.stateVersion = "25.05";
 }
