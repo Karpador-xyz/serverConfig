@@ -1,13 +1,28 @@
 { pkgs, ... }:
 let
-  kodi = pkgs.kodi-wayland.withPackages (kodiPkgs: with kodiPkgs; [
-    vfs-sftp bluetooth-manager youtube orftvthek keymap joystick
-  ]);
+  # kodi = pkgs.kodi-wayland.withPackages (kodiPkgs: with kodiPkgs; [
+  #   vfs-sftp bluetooth-manager youtube orftvthek keymap joystick
+  # ]);
   # retroarch = pkgs.retroarch.withCores (
   #   cores: with cores; [
   #     desmume dolphin citra
   #   ]
   # );
+  kiosk = pkgs.writeShellApplication {
+    name = "chromium-kiosk";
+    runtimeInputs = [ pkgs.chromium ];
+    text = ''
+      chromium \
+        --no-first-run \
+        --disable \
+        --disable-translate \
+        --disable-infobars \
+        --disable-suggestions-service \
+        --disable-save-password-bubble \
+        --start-maximized \
+        --kiosk "http://127.0.0.1:8096"
+    '';
+  };
 in {
   imports = [
     ./disko.nix
@@ -23,7 +38,7 @@ in {
 
   users.users.kodi.isNormalUser = true;
   services.cage.user = "kodi";
-  services.cage.program = "${kodi}/bin/kodi-standalone";
+  services.cage.program = "${kiosk}/bin/chromium-kiosk";
   services.cage.enable = true;
 
   networking.hostName = "boop";
