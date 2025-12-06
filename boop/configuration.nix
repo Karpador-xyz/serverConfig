@@ -20,7 +20,7 @@ let
         --disable-suggestions-service \
         --disable-save-password-bubble \
         --start-maximized \
-        --kiosk "http://127.0.0.1:8096"
+        --kiosk "http://boop:8096"
     '';
   };
 in {
