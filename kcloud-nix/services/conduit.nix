@@ -1,4 +1,4 @@
-{ config, lib, unstable, inputs, ... }:
+{ config, lib, unstable, ... }:
 let
   address = "127.0.0.1";
   port = 6167;
@@ -7,10 +7,6 @@ let
   mxDomain = "mx.${domain}";
   mxAddress = "https://${mxDomain}";
 in {
-  # workaround for now: import mautrix-discord service from unstable
-  imports = [
-    "${inputs.unstable}/nixos/modules/services/matrix/mautrix-discord.nix"
-  ];
 
   services.matrix-continuwuity = {
     enable = true;

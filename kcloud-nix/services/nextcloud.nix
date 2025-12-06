@@ -25,11 +25,11 @@
       mail_from_address = "wolke";
       mail_domain = "karpador.xyz";
       mail_smtpauthtype = "LOGIN";
-      mail_smtpauth = 1;
+      mail_smtpauth = true;
       mail_smtphost = "mail.karpador.xyz";
-      mail_smtpport = "587";
+      mail_smtpport = 587;
       mail_smtpname = "wolke@karpador.xyz";
-      mail_smtpsecure = "tls";
+      mail_smtpsecure = "ssl";
       preview_max_x = 900;
       preview_max_y = 900;
       preview_max_scale_factor = 1.5;
