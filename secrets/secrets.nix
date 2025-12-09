@@ -1,7 +1,7 @@
 let
   consts = import ../const.nix;
-  inherit (consts.sshKeys.sylvie) godemiche tzuyu;
-  local-keys = [ godemiche tzuyu ];
+  inherit (consts.sshKeys.sylvie) godemiche tzuyu harald;
+  local-keys = [ godemiche tzuyu harald ];
 
   inherit (consts.hostKeys) kcloud-nix karp-zbox bakapa moo boop;
   kcloud-keys = local-keys ++ [ kcloud-nix ];
