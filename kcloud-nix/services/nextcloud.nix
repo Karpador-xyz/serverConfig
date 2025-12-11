@@ -2,7 +2,7 @@
 {
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud31;
+    package = pkgs.nextcloud32;
     hostName = "cloud.karpador.xyz";
     https = true;
     appstoreEnable = true;
