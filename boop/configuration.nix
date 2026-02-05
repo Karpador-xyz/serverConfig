@@ -9,18 +9,10 @@ let
   #   ]
   # );
   kiosk = pkgs.writeShellApplication {
-    name = "chromium-kiosk";
-    runtimeInputs = [ pkgs.chromium ];
+    name = "kiosk";
+    runtimeInputs = [ pkgs.jellyfin-desktop ];
     text = ''
-      chromium \
-        --no-first-run \
-        --disable \
-        --disable-translate \
-        --disable-infobars \
-        --disable-suggestions-service \
-        --disable-save-password-bubble \
-        --start-maximized \
-        --kiosk "http://boop:8096"
+      jellyfin-desktop --fullscreen --tv
     '';
   };
 in {
@@ -38,7 +30,7 @@ in {
 
   users.users.kodi.isNormalUser = true;
   services.cage.user = "kodi";
-  services.cage.program = "${kiosk}/bin/chromium-kiosk";
+  services.cage.program = "${kiosk}/bin/kiosk";
   services.cage.enable = true;
 
   networking.hostName = "boop";
