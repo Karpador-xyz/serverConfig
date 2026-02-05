@@ -77,10 +77,10 @@
           };
         };
       };
-      karp-zbox = {
-        name = "karp-zbox";
-        system = "x86_64-linux";
-      };
+      #karp-zbox = {
+      #  name = "karp-zbox";
+      #  system = "x86_64-linux";
+      #};
       bakapa = {
         name = "bakapa";
         system = "x86_64-linux";
